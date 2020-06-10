@@ -1,0 +1,74 @@
+<div class="painel">
+    <div class="card mt-1 shadow p-3 mb-5 bg-white rounded">
+
+        <div class="card-header">
+            <div class="float-left">
+                <h2>Excluir cartao</h2>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form class="form-horizontal">
+               
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Bandeira:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" disabled>
+                            <option>{{ cartao.bandeira.nomeBandeira }}</option>					
+                        </select>	
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Cliente:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" disabled>
+                            <option>{{ cartao.cliente.nome }}</option>                        								
+                        </select>	
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Data de Vencimento:</label>
+                    <div class="col-sm-4">
+                        <input
+                            class="form-control" 
+                            [value]="cartao.dataVencimento"
+                            type="date"
+                            disabled/>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Valor Nominal:</label>
+                    <div class="col-sm-4">
+                        <input                
+                            class="form-control" 
+                            [value]="cartao.valor"
+                            disabled/>
+                    </div>
+                </div>   
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <button 
+                            (click)="excluirCartao()"
+                            class="btn btn-success mb-1 btn-sm">
+                            Excluir
+                        </button>
+                        <button 
+                            (click)="cancelar()" 
+                            class="btn btn-danger mb-1 btn-sm">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>         
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

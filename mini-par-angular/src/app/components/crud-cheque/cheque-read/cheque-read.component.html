@@ -1,0 +1,82 @@
+<div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
+
+	<div class="card-header">
+		<div class="float-left">
+			<h2>Consulta de cheques</h2>
+		</div>
+		<div class="float-right">
+			<button class="btn btn-primary mb-1 btn-sm" [routerLink]="['/cheques/novo']">Novo</button>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<form [formGroup]="pesquisaForm">
+			<div class="form-row">
+				<label class="col-sm-0 col-form-label">Pagador:</label>
+				<div class="col-sm-4">
+					<select class="form-control" formControlName="pagador" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let pagador of pagadorCombo" 
+							[ngValue]="pagador.id">
+							{{pagador.nome}}
+						</option>								
+					</select>
+				</div>
+				<label class="col-sm-0 col-form-label cliente">Cliente:</label>
+				<div class="col-sm-4">
+					<select class="form-control" formControlName="cliente" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let cliente of clienteCombo" 
+							[ngValue]="cliente.id">
+							{{cliente.nome}}
+						</option>								
+					</select>
+				</div>			
+				<button 
+					class="btn btn-primary mb-1 btn-sm btn-pesquisar"
+					(click)="pesquisarCheque()">
+					Pesquisar
+				</button>			
+			</div>
+			<!--<app-form-debug [form]="pesquisaForm" ></app-form-debug>-->
+		</form>
+	</div>
+</div>
+		
+<table id="tabela" class="table table-bordered table-striped table-houver shadow p-3 mb-5 bg-white rounded" *ngIf="cheques">
+	<thead>
+			<th>Pagador</th>
+			<th>CPF</th>
+			<th>Cliente</th>
+            <th>Data Criação</th>
+            <th>Data Vencimento</th>
+            <th>Valor Nominal</th>
+			<th>Ações</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let cheque of cheques">
+			<td>{{ cheque.pagador.nome }}</td>
+            <td>{{ cheque.cliente.cpf }}</td>
+            <td>{{ cheque.cliente.nome }}</td>
+			<td>{{ cheque.dataCriacao |date:'dd-MM-yyyy' }}</td>
+            <td>{{ cheque.dataVencimento |date:'dd-MM-yyyy' }}</td>
+            <td>{{ cheque.valor |currency:'BRL':true }}</td>
+			<td>
+				<button 
+					class="btn btn-warning mb-1 btn-sm" 
+					routerLink="/cheques/editar/{{ cheque.id }}">
+					Alterar
+				</button>
+
+				<button 
+					class="btn btn-danger mb-1 btn-sm" 
+					routerLink="/cheques/deletar/{{ cheque.id }}">
+					Excluir
+				</button>
+			</td>
+		</tr>
+	</tbody>				
+</table>
+

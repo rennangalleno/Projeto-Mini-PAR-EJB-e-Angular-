@@ -1,0 +1,101 @@
+<div class="painel">
+    <div class="card mt-1 shadow p-3 mb-5 bg-white rounded">
+
+        <div class="card-header">
+            <div class="float-left">
+                <h2>Atualizar boleto</h2>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="boletoForm" (ngSubmit)="atualizarBoleto()" class="form-horizontal">
+               
+                <div class="form-group" [ngClass]="aplicaCssErro('pagador')">
+                    <label class="col-sm-4 control-label">Pagador:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="pagador" >
+                            <option value="">Selecione</option>
+                            <option 
+                                *ngFor="let pagador of pagadorCombo" 
+                                [ngValue]="pagador">
+                                {{pagador.nome}}
+                            </option>								
+                        </select>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('pagador')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>		
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="aplicaCssErro('cliente')">
+                    <label class="col-sm-1 control-label">Cliente:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="cliente">
+                            <option value="">Selecione</option>
+                            <option 
+                                *ngFor="let cliente of clienteCombo" 
+                                [ngValue]="cliente">
+                                {{cliente.nome}}
+                            </option>								
+                        </select>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('cliente')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>		
+                    </div>
+                </div>
+                
+                <div class="form-group" [ngClass]="aplicaCssErro('dataVencimento')">
+                    <label class="col-sm-4 control-label">Data de Vencimento:</label>
+                    <div class="col-sm-4">
+                        <input
+                            class="form-control" 
+                            formControlName="dataVencimento"
+                            type="date"/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('dataVencimento')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>
+                </div> 
+
+                <div class="form-group" [ngClass]="aplicaCssErro('valor')">
+                    <label class="col-sm-4 control-label">Valor Nominal:</label>
+                    <div class="col-sm-4">
+                        <input                
+                            class="form-control" 
+                            formControlName="valor"
+                            placeholder="999"/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('valor')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>
+                </div>   
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <button 
+                            type="submit"
+                            [disabled]="boletoForm.invalid" 
+                            class="btn btn-success mb-1 btn-sm">
+                            Atualizar
+                        </button>
+                        <button 
+                            (click)="cancelar()" 
+                            class="btn btn-danger mb-1 btn-sm">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>  
+                <app-form-debug [form]="boletoForm" ></app-form-debug>          
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

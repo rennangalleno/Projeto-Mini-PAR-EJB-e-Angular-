@@ -1,0 +1,90 @@
+<div class="painel">
+    <div class="card mt-1 shadow p-3 mb-5 bg-white rounded">
+
+        <div class="card-header">
+            <div class="float-left">
+                <h2>Incluir cliente</h2>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="clienteForm" (ngSubmit)="criarCliente()" class="form-horizontal">
+                
+                <div class="form-group" [ngClass]="aplicaCssErro('cpf')">
+                    <label for="cpf" class="col-sm-1 control-label">CPF:</label>
+                    <div class="col-sm-4">
+                        <input                            
+                            id="cpf"
+                            class="form-control" 
+                            formControlName="cpf"
+                            placeholder="999.999.999-99"
+                            autofocus/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('cpf')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>
+                </div>
+                                
+                <div class="form-group" [ngClass]="aplicaCssErro('nome')">
+                    <label class="col-sm-1 control-label">Nome:</label>
+                    <div class="col-sm-4">
+                        <input
+                            class="form-control"    
+                            formControlName="nome"  
+                            placeholder="nome"/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('nome')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>       
+                </div>
+                
+                <div class="form-group" [ngClass]="aplicaCssErro('email')">
+                    <label class="col-sm-1 control-label">E-mail:</label>
+                    <div class="col-sm-4">
+                        <input                
+                            class="form-control" 
+                            formControlName="email"
+                            placeholder="nome@email.com"/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('email')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="aplicaCssErro('dataNascimento')">
+                    <label class="col-sm-4 control-label">Data de Nascimento:</label>
+                    <div class="col-sm-4">
+                        <input
+                            class="form-control" 
+                            formControlName="dataNascimento"
+                            type="date"/>
+                        <app-show-message-field
+                            [mostrarErro]="verificaValidTouched('dataNascimento')" 
+                            msgErro="Campo obrigatório.">
+                        </app-show-message-field>
+                    </div>
+                </div>    
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <button 
+                            type="submit"
+                            [disabled]="clienteForm.invalid" 
+                            class="btn btn-success mb-1 btn-sm">
+                            Cadastrar
+                        </button>
+                        <button 
+                            (click)="cancelar()" 
+                            class="btn btn-danger mb-1 btn-sm">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>          
+            </form>
+        </div>
+    </div>
+</div>
+

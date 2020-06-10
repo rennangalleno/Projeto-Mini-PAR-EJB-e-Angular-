@@ -1,0 +1,38 @@
+table{
+    margin-top: -30px;
+    margin-bottom: 800px;
+}
+
+.btn-warning{
+    margin-top: -7px;
+    margin-right: 10px;
+}
+
+.btn-danger{
+    margin-top: -7px;
+    margin-right: -15px;
+}
+
+td{
+    padding-bottom: 2px;
+}
+
+.card-header{
+    height: 50px;
+}
+
+.card-body{
+    padding-bottom: 0px;
+}
+
+label{
+    font-weight: bold ;
+}
+
+.nome {
+    margin-left: 10px;
+}
+
+.btn-pesquisar{
+    margin-left: 10px;
+}

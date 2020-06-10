@@ -1,0 +1,70 @@
+<div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
+
+	<div class="card-header">
+		<div class="float-left">
+			<h2>Consulta de clientes</h2>
+		</div>
+		<div class="float-right">
+			<button class="btn btn-primary mb-1 btn-sm" [routerLink]="['/clientes/novo']">Novo</button>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<form [formGroup]="pesquisaForm">
+			<div class="form-row">
+				<label class="col-sm-0 col-form-label">CPF:</label>
+				<div class="col-sm-4">
+					<input 
+						type="text" 
+						class="form-control mb-1" 
+						placeholder="999-999-999-99"
+						formControlName="cpf">
+				</div>
+				<label class="col-sm-0 col-form-label nome">Nome:</label>
+				<div class="col-sm-5">
+					<input 
+						type="text" 
+						class="form-control mb-1" 
+						placeholder="Nome"
+						formControlName="nome">
+				</div>			
+				<button 
+					class="btn btn-primary mb-1 btn-sm btn-pesquisar"
+					(click)="buscarCliente()">
+					Pesquisar
+				</button>			
+			</div>
+		</form>
+	</div>
+</div>
+		
+	 <!--*ngIf="pagadores | async as pagadores; else loading-->
+<table id="tabela" class="table table-bordered table-striped table-houver shadow p-3 mb-5 bg-white rounded" *ngIf="clientes">
+	<thead>
+			<th>CPF</th>
+			<th>Nome</th>
+			<th>E-mail</th>
+			<th>Data Nascimento</th>
+			<th>Ações</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let cliente of clientes">
+			<!-- (?) operador elvis que não deixa quebrar quando o atributo vier nulo-->
+			<td>{{ cliente?.cpf }}</td>
+			<td>{{ cliente?.nome }}</td>
+			<td>{{ cliente?.email }}</td>
+			<td>{{ cliente?.dataNascimento |date:'dd-MM-yyyy' }}</td>
+			<!--<td>{{ pagador?.valor |number:2.1-2 |currency:'BRL':true }}</td>-->
+			<td>
+				<button class="btn btn-warning mb-1 btn-sm" routerLink="/clientes/editar/{{ cliente.id }}">
+					Alterar
+				</button>
+
+				<button class="btn btn-danger mb-1 btn-sm" routerLink="/clientes/deletar/{{ cliente.id }}">
+					Excluir
+				</button>
+			</td>
+		</tr>
+	</tbody>				
+</table>
+

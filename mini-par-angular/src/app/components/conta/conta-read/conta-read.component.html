@@ -1,0 +1,35 @@
+<div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
+
+	<div class="card-header">
+		<div class="float-left">
+			<h2>Consultar extrato de conta</h2>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<form [formGroup]="contaForm">
+			<div class="form-row">
+                <label class="col-sm-0 col-form-label">CPF:</label>
+				<div class="col-sm-2">
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="cpf"
+                        placeholder="999.999.999-99" >
+				</div>
+				<label class="col-sm-0 col-form-label">Conta Corrente:</label>
+				<div class="col-sm-2">
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="conta"
+                        placeholder="9999-9" >
+				</div>
+						
+				<button 
+					class="btn btn-primary mb-1 btn-sm btn-pesquisar">Gerar</button>			
+			</div>
+			<!--<app-form-debug [form]="pesquisaForm" ></app-form-debug>-->
+		</form>
+	</div>
+</div>

@@ -1,0 +1,137 @@
+<div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
+
+	<div class="card-header">
+		<div class="float-left">
+			<h2>Consulta de recebiveis</h2>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<form [formGroup]="pesquisarForm">
+            
+            <div class="form-row">
+                <label class="col-sm-0 col-form-label">CPF:</label>
+				<div class="col-sm-2">
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="cpf"
+                        disabled>
+                </div>
+            
+                <label class="col-sm-0 col-form-label">Nome:</label>
+				<div class="col-sm-4">
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="nome"
+                        disabled>
+                </div>
+                
+				<label class="col-sm-0 col-form-label">Conta Corrente:</label>
+				<div class="col-sm-2">
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="conta" 
+                        disabled>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <label class="col-sm-0 col-form-label">Tipo:</label>
+				<div class="col-sm-2">
+					<select class="form-control" formControlName="tipo" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let tipo of tipoCombo" 
+							[ngValue]="tipo.id">
+							{{ tipo.descTipoRecebivel }}
+						</option>								
+					</select>
+                </div>
+                
+				<label class="col-sm-0 col-form-label">Pagador:</label>
+				<div class="col-sm-4">
+					<select class="form-control" formControlName="pagador" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let pagador of pagadorCombo" 
+							[ngValue]="pagador.id">
+							{{ pagador.nome }}
+						</option>								
+					</select>
+                </div>
+                
+				<label class="col-sm-0 col-form-label cliente">Bandeira:</label>
+				<div class="col-sm-2">
+					<select class="form-control" formControlName="bandeira" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let bandeira of bandeiraCombo" 
+							[ngValue]="bandeira.id">
+							{{bandeira.nomeBandeira}}
+						</option>								
+					</select>
+                </div>
+
+                <button 
+                    class="btn btn-primary mb-1 btn-sm btn-pesquisar"
+                    (click)="buscarRecebiveis()">
+                    Pesquisar
+                </button>	
+            </div>	
+
+		</form>
+	</div>
+</div>
+		
+<table 
+    id="tabela" 
+    class="table table-bordered table-striped table-houver shadow p-3 mb-5 bg-white rounded" 
+    *ngIf="cheques || boletos || cartoes">
+	<thead>
+            <th><input type="checkbox" disabled></th>
+            <th>Tipo Recebivel</th>
+			<th>Número</th>
+            <th>Pagador</th>
+            <th>Valor Nominal</th>
+            <th>Data Criação</th>
+            <th>Data Vencimento</th>           
+			<th>Situação</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let cheque of cheques">
+            <td><input type="checkbox" value="cheque.id"></td>
+			<td>{{ cheque.tipoRecebivel.descTipoRecebivel }}</td>
+            <td>{{ cheque.id }}</td>
+            <td>{{ cheque.pagador.nome }}</td>
+            <td>{{ cheque.valor |currency:'BRL':true }}</td>
+			<td>{{ cheque.dataCriacao |date:'dd-MM-yyyy' }}</td>
+            <td>{{ cheque.dataVencimento |date:'dd-MM-yyyy' }}</td>
+			<td>{{ cheque.situacaoRecebivel.desSituacaoRecebivel}}</td>
+        </tr>
+        <tr *ngFor="let boleto of boletos">
+            <td><input type="checkbox" value="boleto.id"></td>
+			<td>{{ boleto.tipoRecebivel.descTipoRecebivel }}</td>
+            <td>{{ boleto.id }}</td>
+            <td>{{ boleto.pagador.nome }}</td>
+            <td>{{ boleto.valor |currency:'BRL':true }}</td>
+			<td>{{ boleto.dataCriacao |date:'dd-MM-yyyy' }}</td>
+            <td>{{ boleto.dataVencimento |date:'dd-MM-yyyy' }}</td>
+			<td>{{ boleto.situacaoRecebivel.desSituacaoRecebivel}}</td>
+        </tr>
+        <tr *ngFor="let cartao of cartoes">
+            <td><input type="checkbox" value="cartao.id"></td>
+			<td>{{ cartao.tipoRecebivel.descTipoRecebivel }}</td>
+            <td>{{ cartao.id }}</td>
+            <td>{{ cartao.bandeira.nomeBandeira }}</td>
+            <td>{{ cartao.valor |currency:'BRL':true }}</td>
+			<td>{{ cartao.dataCriacao |date:'dd-MM-yyyy' }}</td>
+            <td>{{ cartao.dataVencimento |date:'dd-MM-yyyy' }}</td>
+			<td>{{ cartao.situacaoRecebivel.desSituacaoRecebivel}}</td>
+		</tr>
+	</tbody>				
+</table>
+
+

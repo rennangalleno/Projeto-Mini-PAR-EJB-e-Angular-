@@ -1,0 +1,18 @@
+.footer {
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    background-color: #343a40;
+
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.footer > span {
+    font-size: 14px;
+    color: snow;
+    margin-right: 15px;
+}

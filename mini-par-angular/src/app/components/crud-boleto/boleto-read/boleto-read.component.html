@@ -1,0 +1,81 @@
+<div class="card mt-3 shadow p-3 mb-5 bg-white rounded">
+
+	<div class="card-header">
+		<div class="float-left">
+			<h2>Consulta de boletos</h2>
+		</div>
+		<div class="float-right">
+			<button class="btn btn-primary mb-1 btn-sm" [routerLink]="['/boletos/novo']">Novo</button>
+		</div>
+	</div>
+	
+	<div class="card-body">
+		<form [formGroup]="pesquisaForm">
+			<div class="form-row">
+				<label class="col-sm-0 col-form-label">Pagador:</label>
+				<div class="col-sm-4">
+					<select class="form-control" formControlName="pagador" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let pagador of pagadorCombo" 
+							[ngValue]="pagador.id">
+							{{pagador.nome}}
+						</option>								
+					</select>
+				</div>
+				<label class="col-sm-0 col-form-label cliente">Cliente:</label>
+				<div class="col-sm-4">
+					<select class="form-control" formControlName="cliente" >
+						<option value="">Selecione</option>
+						<option 
+							*ngFor="let cliente of clienteCombo" 
+							[ngValue]="cliente.id">
+							{{cliente.nome}}
+						</option>								
+					</select>
+				</div>			
+				<button 
+					class="btn btn-primary mb-1 btn-sm btn-pesquisar"
+					(click)="buscarBoleto()">
+					Pesquisar
+				</button>			
+			</div>
+		</form>
+	</div>
+</div>
+		
+<table id="tabela" class="table table-bordered table-striped table-houver shadow p-3 mb-5 bg-white rounded" *ngIf="boletos">
+	<thead>
+			<th>Pagador</th>
+			<th>CPF</th>
+			<th>Cliente</th>
+            <th>Data Criação</th>
+            <th>Data Vencimento</th>
+            <th>Valor Nominal</th>
+			<th>Ações</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let boleto of boletos">
+			<td>{{ boleto.pagador.nome }}</td>
+            <td>{{ boleto.cliente.cpf }}</td>
+            <td>{{ boleto.cliente.nome }}</td>
+			<td>{{ boleto.dataCriacao |date:'dd-MM-yyyy' }}</td>
+            <td>{{ boleto.dataVencimento |date:'dd-MM-yyyy' }}</td>
+            <td>{{ boleto.valor |currency:'BRL':true }}</td>
+			<td>
+				<button 
+					class="btn btn-warning mb-1 btn-sm" 
+					routerLink="/boletos/editar/{{ boleto.id }}">
+					Alterar
+				</button>
+
+				<button 
+					class="btn btn-danger mb-1 btn-sm"
+					routerLink="/boletos/deletar/{{ boleto.id }}">
+					Excluir
+				</button>
+			</td>
+		</tr>
+	</tbody>				
+</table>
+
