@@ -31,7 +31,8 @@ public class BoletoBusiness {
 	}
 	
 	public List<Boleto> listaBoleto() {
-		 return boletoDao.listar();
+		System.out.println("DAO: "+boletoDao.listar()); 
+		return boletoDao.listar();
 	}
 	
 	public List<Boleto> consultaBoleto(Long clienteId, Long pagadorId) {

@@ -29,6 +29,7 @@ export class CartaoReadComponent implements OnInit {
     
     this.cartaoService.read().subscribe((cartoes)=>{
       this.cartoes = cartoes;
+      console.log(cartoes);
     });
     this.cartaoService.readBandeira().subscribe((bandeiras)=>{
       this.bandeiraCombo = bandeiras;

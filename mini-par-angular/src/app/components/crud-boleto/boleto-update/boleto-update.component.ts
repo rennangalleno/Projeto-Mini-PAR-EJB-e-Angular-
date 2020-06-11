@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BoletoUpdateComponent implements OnInit {
 
-  boletoForm:FormGroup = new FormGroup({});
+  boletoForm:FormGroup;
   clienteCombo: Cliente[];
   pagadorCombo: Pagador[];
   boleto: Boleto;
@@ -30,6 +30,8 @@ export class BoletoUpdateComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.createForm();
+
     this.clienteService.read().subscribe((clientes) => {
       this.clienteCombo = clientes;
     });
@@ -40,16 +42,28 @@ export class BoletoUpdateComponent implements OnInit {
     const id = +this.activeRoute.snapshot.paramMap.get('id');
     this.boletoService.readById(id).subscribe((boleto)=>{
       this.boleto = boleto;
-
-      this.boletoForm = this.formBuilder.group({
-        pagador: ["", Validators.required],
-        cliente: ["", Validators.required],
-        dataVencimento: [this.boleto.dataVencimento, Validators.required],
-        valor: [this.boleto.valor, Validators.required]
-      });
-
+      this.updateForm();
     });
+  }
 
+  createForm():void{
+    this.boletoForm = this.formBuilder.group({
+      id:[null],
+      pagador: ["", Validators.required],
+      cliente: ["", Validators.required],
+      dataVencimento: [null, Validators.required],
+      valor: [null, Validators.required]
+    });
+  }
+
+  updateForm():void{
+    this.boletoForm.setValue({
+      id:this.boleto.id,
+      pagador: "",
+      cliente: "",
+      dataVencimento: this.boleto.dataVencimento,
+      valor: this.boleto.valor
+    });
   }
 
   atualizarBoleto(): void {

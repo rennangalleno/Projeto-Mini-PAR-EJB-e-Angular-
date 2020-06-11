@@ -23,10 +23,8 @@ public class PagadorDAO {
 	
 	public void gravar(Pagador pagador) {
 		if(pagador.getId() == null) {
-			System.out.println("estou no if:"+ pagador.getId());
 			manager.persist(pagador);
 		}else {
-			System.out.println("Estou no else");
 			manager.merge(pagador);
 		}	
 	}

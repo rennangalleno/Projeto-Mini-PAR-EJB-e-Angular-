@@ -28,20 +28,23 @@ export class BoletoCreateComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.createForm();
+    
     this.clienteService.read().subscribe((clientes) => {
       this.clienteCombo = clientes;
     });
     this.pagadorService.read().subscribe((pagadores) => {
       this.pagadorCombo = pagadores;
     });
+  }
 
-    this.boletoForm = this.formBuilder.group({
-      
+  createForm():void{
+    this.boletoForm = this.formBuilder.group({    
       pagador: ["", Validators.required],
       cliente: ["", Validators.required],
       dataVencimento: [null, Validators.required],
       valor: [null, Validators.required]
-    })
+    });
   }
 
   criarBoleto(): void {

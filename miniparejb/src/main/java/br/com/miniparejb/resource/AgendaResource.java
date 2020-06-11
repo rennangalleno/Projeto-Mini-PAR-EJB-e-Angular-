@@ -32,7 +32,6 @@ public class AgendaResource {
 	@Path("/tipos")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listaTipoRecebive () {
-		System.out.println("teste");
 		return Response.ok(agendaBusiness.listaTipoRecebivel()).build() ;
 	}
 	

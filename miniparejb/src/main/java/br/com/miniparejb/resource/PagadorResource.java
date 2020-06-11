@@ -32,7 +32,6 @@ public class PagadorResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON) 
 	public Response gravar(Pagador pagador) throws NegocioExeception {
-		System.out.println("Pagador vindo do front: "+pagador);
 		pagadorBusiness.gravar(pagador);
 		return Response.status(201).build();
 	}
@@ -56,7 +55,6 @@ public class PagadorResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response atualiza(Pagador pagador) throws NegocioExeception {		
-		System.out.println("A data de nascimento é: "+pagador.getDataNascimento());
 		pagadorBusiness.gravar(pagador);
 		return Response.ok(pagador).build();
 	}

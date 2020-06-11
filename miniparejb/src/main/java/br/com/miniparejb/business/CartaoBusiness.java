@@ -36,7 +36,8 @@ public class CartaoBusiness {
 	}
 	
 	public List<Cartao> listaCartao() {
-		 return cartaoDao.listar();
+		System.out.println("DAO: "+cartaoDao.listar()); 
+		return cartaoDao.listar();
 	}
 	
 	public List<Cartao> consultaCartao(Long clienteId, Integer bandeiraId) {

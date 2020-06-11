@@ -30,7 +30,6 @@ public class PagadorBusiness {
 				throw new NegocioExeception("Pagador já cadastrado");
 			} 		
 		}
-		System.out.println(pagador);
 		pagadorDao.gravar(pagador);
 	}
 

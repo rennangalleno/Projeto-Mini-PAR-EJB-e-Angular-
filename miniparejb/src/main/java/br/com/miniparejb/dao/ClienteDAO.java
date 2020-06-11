@@ -3,8 +3,8 @@ package br.com.miniparejb.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -22,7 +22,7 @@ public class ClienteDAO {
 	@PersistenceContext
 	private EntityManager manager;
 
-	@Inject
+	@EJB
 	private ContaDAO contaDao;
 
 	public void gravar(Cliente cliente, Long id) {

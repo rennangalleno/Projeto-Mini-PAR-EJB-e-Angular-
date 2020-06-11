@@ -15,7 +15,7 @@ import { Pagador } from 'src/app/models/pagador';
 })
 export class ChequeUpdateComponent implements OnInit {
 
-  chequeForm:FormGroup = new FormGroup({});
+  chequeForm:FormGroup;
   clienteCombo: Cliente[];
   pagadorCombo: Pagador[];
   cheque: Cheque;
@@ -42,12 +42,14 @@ export class ChequeUpdateComponent implements OnInit {
     const id = +this.activeRoute.snapshot.paramMap.get('id');
     this.chequeService.readById(id).subscribe((cheque)=>{
       this.cheque = cheque;
+      console.log(cheque);
       this.updateForm();
     });
   }
 
   createForm():void{
     this.chequeForm = this.formBuilder.group({
+      id:[null],
       pagador: ["", Validators.required],
       cliente: ["", Validators.required],
       dataVencimento: [null, Validators.required],
@@ -57,6 +59,7 @@ export class ChequeUpdateComponent implements OnInit {
 
   updateForm():void{
     this.chequeForm.setValue({
+      id:this.cheque.id,
       pagador: "",
       cliente: "",
       dataVencimento: this.cheque.dataVencimento,
@@ -66,6 +69,7 @@ export class ChequeUpdateComponent implements OnInit {
 
   atualizarCheque(): void {
     const cheque = this.chequeForm.getRawValue() as Cheque;
+    console.log(cheque);
     this.chequeService.update(cheque).subscribe(()=>{
       this.showMessageService.showMessage("Cheque atualizado com sucesso!");
       this.router.navigate(['/cheques']);

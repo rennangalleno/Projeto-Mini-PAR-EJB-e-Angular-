@@ -14,7 +14,7 @@
                     <label class="col-sm-4 control-label">Bandeira:</label>
                     <div class="col-sm-4">
                         <select class="form-control" formControlName="bandeira" >
-                            <option [value]="">Selecione</option>
+                            <option value="">Selecione</option>
                             <option 
                                 *ngFor="let bandeira of bandeiraCombo" 
                                 [ngValue]="bandeira">
@@ -88,8 +88,7 @@
                             Cancelar
                         </button>
                     </div>
-                </div>  
-                <app-form-debug [form]="cartaoForm" ></app-form-debug>          
+                </div>            
             </form>
         </div>
     </div>

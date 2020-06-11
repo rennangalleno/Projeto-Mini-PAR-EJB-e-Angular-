@@ -26,20 +26,23 @@ export class CartaoCreateComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.createForm();
+
     this.clienteService.read().subscribe((clientes) => {
       this.clienteCombo = clientes;
     });
     this.cartaoService.readBandeira().subscribe((bandeiras) => {
       this.bandeiraCombo = bandeiras;
     });
+  }
 
-    this.cartaoForm = this.formBuilder.group({
-      
+  createForm():void{
+    this.cartaoForm = this.formBuilder.group({ 
       bandeira: ["", Validators.required],
       cliente: ["", Validators.required],
       dataVencimento: [null, Validators.required],
       valor: [null, Validators.required]
-    })
+    });
   }
 
   criarCartao(): void {

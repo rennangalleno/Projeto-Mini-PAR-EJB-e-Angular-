@@ -7,15 +7,14 @@
             </div>
         </div>
 
-        <div class="card-body" [formGroup]="pagadorForm">
-            <form class="form-horizontal">
+        <div class="card-body">
+            <form class="form-horizontal" [formGroup]="pagadorForm">
                 <div class="form-group">
                     <label class="col-sm-1 control-label">CPF:</label>
                     <div class="col-sm-4">
                         <input
                             formControlName="cpf"
                             class="form-control" 
-                            name="cpf"
                             disabled/>
                     </div>
                 </div>
@@ -26,7 +25,6 @@
                         <input
                             formControlName="nome"
                             class="form-control" 
-                            name="nome"
                             disabled/>
                     </div>
                 </div>
@@ -37,7 +35,6 @@
                         <input
                             formControlName="email"
                             class="form-control" 
-                            name="email"
                             disabled/>
                     </div>
                 </div>
@@ -48,7 +45,6 @@
                         <input
                             formControlName="dataNascimento"
                             class="form-control" 
-                            name="dataNascimento"
                             type="date"
                             disabled/>
                     </div>

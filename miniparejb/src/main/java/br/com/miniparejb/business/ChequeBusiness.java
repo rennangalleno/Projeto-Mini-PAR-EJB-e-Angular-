@@ -31,7 +31,8 @@ public class ChequeBusiness {
 	}
 	
 	public List<Cheque> listaCheque() {
-		 return chequeDao.listar();
+		System.out.println("Dao: "+chequeDao.listar()); 
+		return chequeDao.listar();
 	}
 	
 	public List<Cheque> consultaCheque(Long clienteId, Long pagadorId) {

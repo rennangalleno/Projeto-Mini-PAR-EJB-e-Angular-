@@ -12,9 +12,7 @@ public class ContaDAO {
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public void gravar(Conta conta) {
-		System.out.println("Estou contaDAO "+conta);
-		
+	public void gravar(Conta conta) {		
 		if(conta.getId()==null) {
 			manager.persist(conta);
 		}else {

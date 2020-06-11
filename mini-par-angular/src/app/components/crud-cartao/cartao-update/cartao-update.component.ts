@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CartaoUpdateComponent implements OnInit {
 
-  cartaoForm:FormGroup = new FormGroup({});
+  cartaoForm: FormGroup;
   clienteCombo: Cliente[];
   bandeiraCombo: Bandeira[];
   cartao: Cartao;
@@ -23,34 +23,50 @@ export class CartaoUpdateComponent implements OnInit {
     private cartaoService: CartaoService,
     private clienteService: ClienteService,
     private showMessageService: ShowMessageService,
-    private activeRoute:ActivatedRoute,
+    private activeRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.createForm();
+
     this.clienteService.read().subscribe((clientes) => {
       this.clienteCombo = clientes;
     });
     this.cartaoService.readBandeira().subscribe((bandeiras) => {
       this.bandeiraCombo = bandeiras;
     });
-    
-    const id = +this.activeRoute.snapshot.paramMap.get('id');
-    this.cartaoService.readById(id).subscribe((cartao)=>{
-      this.cartao = cartao;
 
-      this.cartaoForm = this.formBuilder.group({
-        bandeira: [this.cartao.bandeira, Validators.required],
-        cliente: [this.cartao.cliente, Validators.required],
-        dataVencimento: [this.cartao.dataVencimento, Validators.required],
-        valor: [this.cartao.valor, Validators.required]
-      });
+    const id = +this.activeRoute.snapshot.paramMap.get('id');
+    this.cartaoService.readById(id).subscribe((cartao) => {
+      this.cartao = cartao;
+      this.updateForm();
     });
+  }
+
+  createForm(): void {
+    this.cartaoForm = this.formBuilder.group({
+      id:[null],
+      bandeira: ["", Validators.required],
+      cliente: ["", Validators.required],
+      dataVencimento: [null, Validators.required],
+      valor: [null, Validators.required]
+    });
+  }
+
+  updateForm(): void {
+    this.cartaoForm.setValue({
+      id:this.cartao.id,
+      bandeira: "",
+      cliente: "",
+      dataVencimento: this.cartao.dataVencimento,
+      valor: this.cartao.valor
+    })
   }
 
   atualizarCartao(): void {
     const cartao = this.cartaoForm.getRawValue() as Cartao;
-    this.cartaoService.update(cartao).subscribe(()=>{
+    this.cartaoService.update(cartao).subscribe(() => {
       this.showMessageService.showMessage("Cartao atualizado com sucesso!");
       this.router.navigate(['/cartoes']);
     })
@@ -60,12 +76,12 @@ export class CartaoUpdateComponent implements OnInit {
     this.router.navigate(['/cartoes']);
   }
 
-  verificaValidTouched(field){  
-    return this.cartaoForm.get(field) && !this.cartaoForm.get(field).valid && this.cartaoForm.get(field).touched;  
+  verificaValidTouched(field) {
+    return this.cartaoForm.get(field) && !this.cartaoForm.get(field).valid && this.cartaoForm.get(field).touched;
   }
 
-  aplicaCssErro(field){
-    return{
+  aplicaCssErro(field) {
+    return {
       'has-error': this.verificaValidTouched(field),
       'has-feedback': this.verificaValidTouched(field)
     };

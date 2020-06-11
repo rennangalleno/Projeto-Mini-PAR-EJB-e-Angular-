@@ -51,10 +51,7 @@ public class ChequeResource {
 	public Response consultaCheque(
 			@QueryParam("clienteId") Long clienteId,
 			@QueryParam("pagadorId") Long pagadorId) {
-		
-		System.out.println("clienteId: "+clienteId);
-		System.out.println("pagadorId: "+pagadorId);
-		
+				
 		List<Cheque> cheques = chequeBusiness.consultaCheque(clienteId, pagadorId);
 		return Response.ok(ChequeDto.converte(cheques)).build();
 	}

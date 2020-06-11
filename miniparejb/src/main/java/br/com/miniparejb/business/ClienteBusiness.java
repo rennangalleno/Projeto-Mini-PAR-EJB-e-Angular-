@@ -41,15 +41,12 @@ public class ClienteBusiness {
 	}
 		
 	public void atualizar(Cliente clienteDto) {
-		System.out.println(clienteDto);
 		
 		Cliente cliente = clienteDao.find(clienteDto.getId());
 		cliente.setCpf(clienteDto.getCpf());
 		cliente.setNome(clienteDto.getNome());
 		cliente.setEmail(clienteDto.getEmail());
 		cliente.setDataNascimento(clienteDto.getDataNascimento());
-		
-		System.out.println(cliente);
 		
 		clienteDao.atualizar(cliente);
 	}	
