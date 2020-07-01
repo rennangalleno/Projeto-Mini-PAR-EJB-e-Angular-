@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jakartaee>8.0</jakartaee>
     <junit>3.8.1</junit>
-    <log4j-core>2.11.1</log4j-core>
+    <log4j-core>2.13.2</log4j-core>
   </properties>
    <dependencies>
         <dependency>
